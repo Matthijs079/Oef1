@@ -1,0 +1,99 @@
+{% extends '@Main/base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <h1>SHOPPING-CART</h1>
+
+    <div class="float-right">
+        <input type="text" name="daterange" />
+    </div>
+
+    {% if empty %}
+        <h5>Your shopping cart is empty.</h5>
+    {% endif %}
+    {% set cart = app.session.get('cart') %}
+    {% set total = 0 %}
+    {% set count = 0 %}
+
+    {% if kamers %}
+
+        <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Aantal dagen</th>
+                    <th>Beschrijving</th>
+                    <th>Datum</th>
+                    <th>Prijs</th>
+                    <th>Totaal</th>
+                    <th>Verwijderen</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for key, item in cart %}
+                    <tr>
+                        <td>{{ key }}</td>
+                        <td>{{ item }}</td>
+
+                        {% for row in kamers %}
+                            {% if row.id == key %}
+                                <td>{{ row.kamerbeschrijving }}</td>
+                                <td>
+                                    <div class="">
+                                        <input type="text" name="daterange" id="{{ key }}"/>
+                                    </div>
+                                </td>
+                                <td>€{{ row.kamerprijs | number_format(2)  }}</td>
+                                <td>€{{ (row.kamerprijs * item) | number_format(2) }}</td>
+                                {% set total = total + (row.kamerprijs * item)  %}
+                            {% endif %}
+                        {% endfor %}
+
+                        <td><a class="btn btn-danger" href="{{ path('booking_remove', {'id': key}) }}">Remove</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+    {% endif %}
+
+
+    <H4 class="right">Totaal prijs = €{{ total | number_format(2) }}</H4>
+    <a href="{{ path('kamer_index') }}"  class="btn btn-info">Boek nog een kamer</a>
+    <a href="{{ path('checkout') }}" class="btn btn-success float-right">Betalen</a>
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script type="text/javascript">
+        $(function() {
+            $('input[name="daterange"]').daterangepicker();
+        });
+
+        $(function() {
+
+            $(".daterange").each(function() {
+                $(this).daterangepicker({
+                    locale: {
+                        format: 'DD-MM-YYYY'
+                    }
+                })
+            });
+            $('input').change(function(){
+                var id = this.id;
+                var edit = $(this).val();
+                var date1 = new Date(edit.substring(0, 10));
+                var date2 = new Date(edit.substring(13));
+                var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                alert('Changed! ' + id + '/ ' + diffDays);
+                window.location.href = "/booking/add_dayes/" + id + "/" + edit + "";
+            });
+        });
+    </script>
+
+{% endblock %}

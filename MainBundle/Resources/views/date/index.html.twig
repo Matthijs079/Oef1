@@ -1,0 +1,35 @@
+{% extends '@Main/base.html.twig' %}
+
+{% block body %}
+    <h1>Dates list</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Checkin</th>
+                <th>Checkout</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for date in dates %}
+            <tr>
+                <td><a href="{{ path('date_show', { 'id': date.id }) }}">{{ date.id }}</a></td>
+                <td>{% if date.checkin %}{{ date.checkin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if date.checkout %}{{ date.checkout|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+
+                    <a class="btn btn-info" href="{{ path('date_show', { 'id': date.id }) }}">show</a>
+
+                    <a class="btn btn-warning" href="{{ path('date_edit', { 'id': date.id }) }}">edit</a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-success" href="{{ path('date_new') }}">Create a new date</a>
+
+{% endblock %}

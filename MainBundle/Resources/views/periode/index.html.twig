@@ -1,0 +1,41 @@
+{% extends '@Main/base.html.twig' %}
+
+{% block body %}
+    <h1>Periodes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Checkin</th>
+                <th>Checkout</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for periode in periodes %}
+            <tr>
+                <td><a href="{{ path('periode_show', { 'id': periode.id }) }}">{{ periode.id }}</a></td>
+                <td>{% if periode.checkin %}{{ periode.checkin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if periode.checkout %}{{ periode.checkout|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('periode_show', { 'id': periode.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('periode_edit', { 'id': periode.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('periode_new') }}">Create a new periode</a>
+        </li>
+    </ul>
+{% endblock %}

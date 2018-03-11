@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Hoogseizoens list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Begin</th>
+                <th>Eind</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for hoogseizoen in hoogseizoens %}
+            <tr>
+                <td><a href="{{ path('hoogseizoen_show', { 'id': hoogseizoen.id }) }}">{{ hoogseizoen.id }}</a></td>
+                <td>{% if hoogseizoen.begin %}{{ hoogseizoen.begin|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if hoogseizoen.eind %}{{ hoogseizoen.eind|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('hoogseizoen_show', { 'id': hoogseizoen.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('hoogseizoen_edit', { 'id': hoogseizoen.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('hoogseizoen_new') }}">Create a new hoogseizoen</a>
+        </li>
+    </ul>
+{% endblock %}

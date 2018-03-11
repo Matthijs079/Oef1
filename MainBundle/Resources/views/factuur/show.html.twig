@@ -1,0 +1,32 @@
+{% extends '@Main/base.html.twig' %}
+
+{% block body %}
+    <h1>Factuur</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ factuur.id }}</td>
+            </tr>
+            <tr>
+                <th>Factuurdatum</th>
+                <td>{% if factuur.factuurdatum %}{{ factuur.factuurdatum|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('factuur_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('factuur_edit', { 'id': factuur.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

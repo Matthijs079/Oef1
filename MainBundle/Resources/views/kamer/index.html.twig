@@ -1,0 +1,45 @@
+{% extends '@Main/base.html.twig' %}
+
+{% block body %}
+<div class="container">
+        <h1>Kamer list <a class="btn btn-success pull-right" href="{{ path('kamer_new') }}">Create a new kamer</a></h1>
+
+        <div class="col-md-12">
+            <input type="text" name="daterange" />
+        </div>
+
+        <div class="row">
+            {% for kamer in kamers %}
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+
+                    <img class="card-img-top" src="{{ asset('uploads/image/' ~ images[0].image) }}" style="height: auto; width: 350px">
+                    <div class="caption">
+                        <h3>{{ kamer.kamernaam }}</h3>
+                        <p>{{ kamer.kamernaam }}</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{ kamer.kamernummer }}</li>
+                            <li class="list-group-item ">€ {{ kamer.kamerprijs }}</li>
+                        </ul>
+                        <a class="btn btn-info" href="{{ path('kamer_show', { 'id': kamer.id }) }}">show</a>
+
+                        <a class="btn btn-warning" href="{{ path('kamer_edit', { 'id': kamer.id }) }}">edit</a>
+                        <a class="btn btn-success" href="{{ path('booking_add', { 'id': kamer.id }) }}">Boeken</a>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+</div>
+{% endblock %}
+{% block javascripts %}
+
+     <script type="application/javascript">
+         $(function() {
+             $('input[name="daterange"]').daterangepicker();
+         });
+     </script>
+
+{% endblock %}

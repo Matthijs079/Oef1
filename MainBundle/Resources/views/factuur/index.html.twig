@@ -1,0 +1,31 @@
+{% extends '@Main/base.html.twig' %}
+
+{% block body %}
+
+    <h1>Factuurs list</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Factuurdatum</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for factuur in factuurs %}
+            <tr>
+                <td><a href="{{ path('factuur_show', { 'id': factuur.id }) }}">{{ factuur.id }}</a></td>
+                <td>{% if factuur.factuurdatum %}{{ factuur.factuurdatum|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <a class="btn btn-info" href="{{ path('factuur_show', { 'id': factuur.id }) }}">show</a>
+
+                    <a class="btn btn-warning" href="{{ path('factuur_edit', { 'id': factuur.id }) }}">edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

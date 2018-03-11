@@ -1,0 +1,27 @@
+{% extends '@Main/base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/main/css/button.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+    <h1>{{ activiteit.naam }}</h1>
+
+
+
+
+        <p>{{ activiteit.beschrijving }}</p>
+
+    </div>
+
+        <a class="btn btn-light" href="{{ path('activiteit_index') }}">Back to the list</a>
+
+        <a class="btn btn-warning" href="{{ path('activiteit_edit', { 'id': activiteit.id }) }}">Edit</a>
+
+        {{ form_start(delete_form) }}
+            <input class="btn btn-danger" type="submit" value="Delete">
+        {{ form_end(delete_form) }}
+
+{% endblock %}

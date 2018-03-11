@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <title>{% block title %}Welcome!{% endblock %}</title>
+
+        <!-- Bootstrap core CSS -->
+
+        <!-- Custom styles for this template -->
+        <link href="{{ asset('bundles/main/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('bundles/main/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/main/css/landingpage.css') }}">
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
+        {% block stylesheets %}{% endblock %}
+
+    </head>
+    <body>
+
+
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="{{ path('main_default_index') }}">Hotel LaCaserai</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('main_default_index') }}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('activiteit_index') }}">Activiteiten<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ path('factuur_index') }}">Facturen<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ path('kamer_index') }}">Kamers<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ path('date_index') }}">date<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+        <ul class="navbar-nav mr-auto float-right">
+            {% if app.user %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('fos_user_security_logout') }}">logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('fos_user_security_login') }}">login</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <!-- Slider main container -->
+
+    {% block body1 %}{% endblock %}
+    <div class="container">
+        {% block body %}{% endblock %}
+        {% block fos_user_content %}{% endblock %}
+    </div>
+
+
+    <script type="application/javascript" src="{{ asset('bundles/main/js/jquery.min.js') }}"></script>
+    <script type="application/javascript" src="{{ asset('bundles/main/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <script type="application/javascript" src="{{ asset('bundles/main/js/landingpage.js') }}"></script>
+
+
+        {% block javascripts %}
+        {% endblock %}
+
+
+
+    </body>
+</html>
